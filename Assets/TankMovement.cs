@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementScript : MonoBehaviour
+public class TankMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 3.0f;
     float rotationSpeed = 300.0f;

@@ -96,7 +96,19 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
+  rotationAction:
+    m_Name: Rotation
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 826ae8c7-7fcc-4f38-8e17-5ecb1940d514
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   moveValues: {x: 0, y: 0}
+  rotationValues: {x: 0, y: 0}
+  turret: {fileID: 0}
+  barrel: {fileID: 0}
 --- !u!1 &2004529388477293578
 GameObject:
   m_ObjectHideFlags: 0
