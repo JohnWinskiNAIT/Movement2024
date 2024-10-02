@@ -5,9 +5,9 @@ using UnityEngine.InputSystem.HID;
 
 public class Pool : MonoBehaviour
 {
-    [SerializeField] Rigidbody rbody;
+    [SerializeField] List<Rigidbody> rbody;
 
-    float distance = 3.5f;
+    float distance = 6f;
     float antigravForce;
 
     // Start is called before the first frame update
@@ -23,20 +23,20 @@ public class Pool : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (rbody != null)
+        foreach (Rigidbody r in rbody)
         {
-            antigravForce = rbody.mass;
-            rbody.AddForce(transform.up * (distance - transform.position.y) / distance * antigravForce, ForceMode.Impulse);
-        }        
+            antigravForce = r.mass;
+            r.AddForce(transform.up * (distance - (r.gameObject.transform.position.y - transform.position.y)) / distance * antigravForce, ForceMode.Impulse);
+        }       
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        rbody = other.GetComponentInParent<Rigidbody>();
+        rbody.Add(other.GetComponentInParent<Rigidbody>());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        rbody = null;
+        rbody.Remove(other.GetComponentInParent<Rigidbody>());
     }
 }
