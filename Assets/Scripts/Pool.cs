@@ -7,7 +7,7 @@ public class Pool : MonoBehaviour
 {
     [SerializeField] List<Rigidbody> rbody;
 
-    float distance = 6f;
+    float distance = 5f;
     float antigravForce;
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class Pool : MonoBehaviour
     {
         foreach (Rigidbody r in rbody)
         {
-            antigravForce = r.mass;
+            antigravForce = r.mass/1.7f;
             r.AddForce(transform.up * (distance - (r.gameObject.transform.position.y - transform.position.y)) / distance * antigravForce, ForceMode.Impulse);
         }       
     }
