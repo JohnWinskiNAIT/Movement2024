@@ -16,6 +16,13 @@ public class Booster : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rbody.AddForceAtPosition(transform.up * Time.fixedDeltaTime * forceAmount, transform.position, ForceMode.Impulse);
+        if (rbody != null)
+        {
+            rbody.AddForceAtPosition(transform.up * Time.fixedDeltaTime * forceAmount, transform.position, ForceMode.Impulse);
+        }
+        else
+        {
+            rbody = gameObject.AddComponent<Rigidbody>();
+        }        
     }
 }
