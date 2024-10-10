@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
     public InputAction lookAction;
 
     float movementSpeed = 3.0f;
-    float rotationSpeed = 300.0f;
+    float rotationSpeed = 200.0f;
+    float movementForce = 10.0f;
+    float rotationForce = 10.0f;
 
     [SerializeField] Vector2 moveValues;
     [SerializeField] Vector2 lookValues;
@@ -53,9 +55,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * movementSpeed * Time.fixedDeltaTime * moveValues.y);
-        transform.Rotate(Vector3.up, rotationSpeed * Time.fixedDeltaTime * lookValues.x);
+        rbody.AddRelativeForce(new Vector3(moveValues.x, 0, moveValues.y) * Time.fixedDeltaTime * movementForce, ForceMode.VelocityChange);
+        rbody.AddTorque(Vector3.up * rotationForce * Time.fixedDeltaTime * lookValues.x, ForceMode.VelocityChange);
+        //transform.Translate(new Vector3(moveValues.x, 0, moveValues.y) * Time.fixedDeltaTime * movementSpeed);
+        //transform.Rotate(Vector3.up, rotationSpeed * Time.fixedDeltaTime * lookValues.x);
         cam.transform.Rotate(-Vector3.right, rotationSpeed * Time.fixedDeltaTime * lookValues.y);
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     private void OnCollisionEnter(Collision collision)
