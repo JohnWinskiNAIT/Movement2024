@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     float movementSpeed = 3.0f;
     float rotationSpeed = 200.0f;
     float movementForce = 10.0f;
-    float rotationForce = 10.0f;
+    float rotationForce = 5.0f;
 
     [SerializeField] Vector2 moveValues;
     [SerializeField] Vector2 lookValues;
@@ -55,10 +55,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Move with force and torque
         rbody.AddRelativeForce(new Vector3(moveValues.x, 0, moveValues.y) * Time.fixedDeltaTime * movementForce, ForceMode.VelocityChange);
         rbody.AddTorque(Vector3.up * rotationForce * Time.fixedDeltaTime * lookValues.x, ForceMode.VelocityChange);
+        
+        // Move with translate and rotate
         //transform.Translate(new Vector3(moveValues.x, 0, moveValues.y) * Time.fixedDeltaTime * movementSpeed);
         //transform.Rotate(Vector3.up, rotationSpeed * Time.fixedDeltaTime * lookValues.x);
+        
         cam.transform.Rotate(-Vector3.right, rotationSpeed * Time.fixedDeltaTime * lookValues.y);
     }
 
