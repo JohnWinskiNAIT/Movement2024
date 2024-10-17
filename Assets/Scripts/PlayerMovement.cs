@@ -5,16 +5,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region InputActions
     public InputAction moveAction;
     public InputAction jumpAction;
     public InputAction lookAction;
     public InputAction fireAction;
     public InputAction reloadAction;
+    #endregion
 
+    #region Movement Variables
     float movementSpeed = 3.0f;
     float rotationSpeed = 300.0f;
     float movementForce = 10.0f;
     float rotationForce = 5.0f;
+    #endregion
 
     [SerializeField] Vector2 moveValues;
     [SerializeField] Vector2 lookValues;
@@ -40,29 +44,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveValues = moveAction.ReadValue<Vector2>();
-        lookValues = lookAction.ReadValue<Vector2>();
+        ReadMovementValues();
 
-        if (jumpAction.ReadValue<float>() == 1 && grounded)
-        {
-            grounded = false;
-            rbody.AddRelativeForce(Vector3.up * forceValue, ForceMode.Impulse);
-        }
+        PerformActions();
 
-        if (fireAction.ReadValue<float>() == 1)
-        {
-            BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
-        }
-
-        if (reloadAction.ReadValue<float>() == 1)
-        {
-            BroadcastMessage("Reload", SendMessageOptions.DontRequireReceiver);
-        }
-
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10.0f))
-        {
-            targetSphere.transform.position = hit.point;
-        }
+        DoRaycast();
     }
 
     private void FixedUpdate()
@@ -103,5 +89,38 @@ public class PlayerMovement : MonoBehaviour
         lookAction.Disable();
         fireAction.Disable();
         reloadAction.Disable();
+    }
+
+    void ReadMovementValues()
+    {
+        moveValues = moveAction.ReadValue<Vector2>();
+        lookValues = lookAction.ReadValue<Vector2>();
+    }
+
+    void PerformActions()
+    {
+        if (jumpAction.ReadValue<float>() == 1 && grounded)
+        {
+            grounded = false;
+            rbody.AddRelativeForce(Vector3.up * forceValue, ForceMode.Impulse);
+        }
+
+        if (fireAction.ReadValue<float>() == 1)
+        {
+            BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
+        }
+
+        if (reloadAction.ReadValue<float>() == 1)
+        {
+            BroadcastMessage("Reload", SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
+    void DoRaycast()
+    {
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10.0f))
+        {
+            targetSphere.transform.position = hit.point;
+        }
     }
 }

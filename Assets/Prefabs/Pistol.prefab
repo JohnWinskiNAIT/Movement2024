@@ -53,6 +53,10 @@ MonoBehaviour:
   fireForce: 20
   bullet: {fileID: 2202340615464135409, guid: 4420586442210d1438a24db1ef743411, type: 3}
   barrelEnd: {fileID: 8653407435726635787}
+  myMaterial:
+  - {fileID: 2100000, guid: b56a2b014fbedaa4f8c399a137b2d822, type: 2}
+  - {fileID: 2100000, guid: a81f150174ff4094f98c92f1126c3b0e, type: 2}
+  - {fileID: 2100000, guid: c5ce0da461869ff4e9dd46ae5a609ec8, type: 2}
 --- !u!1 &2238534777617343186
 GameObject:
   m_ObjectHideFlags: 0

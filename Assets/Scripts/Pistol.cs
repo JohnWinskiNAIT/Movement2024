@@ -10,6 +10,10 @@ public class Pistol : MonoBehaviour
 
     [SerializeField] GameObject bullet, barrelEnd;
 
+    [SerializeField] Material[] myMaterial;
+
+    int index;
+
     void Fire()
     {
         if (ammo > 0 && Time.time > timeStamp + fireRate)
@@ -22,6 +26,13 @@ public class Pistol : MonoBehaviour
 
             Physics.IgnoreCollision(instantiatedObject.GetComponentInChildren<Collider>(), gameObject.GetComponentInChildren<Collider>());
             instantiatedObject.GetComponent<Rigidbody>().velocity = barrelEnd.transform.forward * fireForce;
+
+            instantiatedObject.GetComponentInChildren<Renderer>().material = myMaterial[index];
+            index++;
+            if (index >= myMaterial.Length)
+            {
+                index = 0;
+            }
         }
     }
 
