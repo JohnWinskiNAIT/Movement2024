@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c5ce0da461869ff4e9dd46ae5a609ec8, type: 2}
+  - {fileID: 2100000, guid: 064155832c785a641bf488aedf980239, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8328898832664081246}
   - component: {fileID: 5757460819546928814}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PortalProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
